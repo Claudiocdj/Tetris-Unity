@@ -55,8 +55,7 @@ public class GameController : MonoBehaviour {
             
         }
 
-        if(blockList.Count > 0)
-            CheckLines();
+        if(blockList.Count > 0) CheckLines();
     }
 
     //funcao que checa se o Player esta apertando algum input:
