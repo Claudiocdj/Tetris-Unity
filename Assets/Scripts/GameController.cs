@@ -3,7 +3,114 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
+    
+    public GameObject[] pieces;
 
+    public int width;
+    public int length;
+    public Vector2 instantiatePos;
+
+    public float timer;
+    public float timerAcc;
+
+    private bool[,] grid;
+
+    private void Start() {
+        grid = new bool[width, length];
+
+        newPiece();
+    }
+
+    private void Update() {
+        CheckLines();
+    }
+
+    public void SetGrid(Vector3 val) {
+        int x = (int)(val.x - transform.position.x);
+        int y = (int)(val.y - transform.position.y);
+
+        grid[x, y] = true;
+    }
+
+    public void newPiece() {
+        int n = Random.Range(0,pieces.Length);
+
+        n = 4;
+
+        GameObject obj = Instantiate(pieces[n], instantiatePos, Quaternion.identity);
+
+        obj.transform.parent = gameObject.transform;
+    }
+
+    public bool PosContains(Vector3 val) {
+        int x = (int)(val.x - transform.position.x);
+        int y = (int)(val.y - transform.position.y);
+        
+        if (grid[x, y]) return true;
+
+        else return false;
+    }
+
+    public void CheckLines() {
+        int j, i = 0, count;
+        
+        while( i < length ) {
+
+            count = 0;
+
+            for(j = 0; j < width; j++) 
+                if (grid[j, i]) count++;
+
+            if (count == 0)
+                return;
+
+            if (count == 10) {
+                RemoveLine(i);
+                return;
+            }
+
+            else i++;
+        }
+    }
+
+    private RaycastHit2D[] LinecastLine(int line) {
+        float x = transform.position.x;
+        float y = transform.position.y;
+
+        Vector2 start = new Vector2(x + .5f, y + line + .5f);
+
+        Vector2 end = new Vector2(x + 9.5f, y + line + .5f);
+
+        //Debug.DrawLine(start, end, Color.green, 1f);
+
+        return Physics2D.LinecastAll(start, end);
+    }
+
+    private void RemoveLine(int line) {
+        RaycastHit2D[] cols = LinecastLine(line);
+
+        foreach (var col in cols)
+            Destroy(col.collider.gameObject);
+
+        for (int i = line + 1; i < length; i++)
+            if (!DownLine(i)) break;
+    }
+
+    private bool DownLine(int line) {
+        for (int i = 0; i < width; i++)
+            grid[i, line-1] = grid[i, line];
+
+        RaycastHit2D[] cols = LinecastLine(line);
+
+        if (cols.Length == 0) return false;
+
+        foreach (var col in cols)
+            col.collider.gameObject.transform.position += Vector3.down;
+
+        return true;
+    }
+
+    /*
     public GameObject oneBlockPrefab;
     public GameObject[] blocks;
     public readonly float delay = 0.3f;
@@ -56,37 +163,6 @@ public class GameController : MonoBehaviour {
         }
 
         if(blockList.Count > 0) CheckLines();
-    }
-
-    //funcao que checa se o Player esta apertando algum input:
-    //movimentacao horizontal, rotacao dos blocos ou aceleracao para baixo
-    private void CheckMovement() {
-
-        if (Input.GetKeyDown(KeyCode.RightArrow)) MovementX(1);
-
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) MovementX(-1);
-
-        if (Input.GetKeyDown(KeyCode.UpArrow)) RotateBlock();
-
-        if (Input.GetKeyDown(KeyCode.DownArrow)) gameDelay = accelerate;
-    }
-
-    //Altera a posicao relativa de cada bloco do conjunto em relacao ao centro
-    //desse conjunto, ou seja, pos(0,0)
-    private void RotateBlock() {
-        float x, y;
-        
-        for (int i = 0; i < 4; i++) {
-            x = block.transform.GetChild(i).transform.localPosition.y;
-
-            y = block.transform.GetChild(i).transform.localPosition.x;
-
-            newPos[i] = block.transform.position + new Vector3(-x, y, 0f);
-        }
-
-        if(CanMove())
-            for (int i = 0; i < 4; i++)
-                block.transform.GetChild(i).transform.position = newPos[i];
     }
 
     //Controla a movimentacao horizontal do conjunto
@@ -217,4 +293,5 @@ public class GameController : MonoBehaviour {
             lineCheck++;
         }
     }
+    */
 }
