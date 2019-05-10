@@ -21,7 +21,7 @@ public class PieceScript : MonoBehaviour {
         widthMap = gc.width;
         pivotMap = gc.gameObject.transform.position;
 
-        timer = gc.timer;
+        timer = gc.CurrentTime;
 
         for(int i = 0; i < 4; i++)
             block[i] = transform.GetChild(i).gameObject;
@@ -85,10 +85,10 @@ public class PieceScript : MonoBehaviour {
     }
 
     private bool CanMoveBlock(Vector3 newpos) {
-        if (newpos.x < pivotMap.x || newpos.x > pivotMap.x + widthMap)
+        if (newpos.x < pivotMap.x || newpos.x > pivotMap.x + widthMap - 1)
             return false;
 
-        if (newpos.y < pivotMap.y || newpos.y > pivotMap.y + lengthMap)
+        if (newpos.y < pivotMap.y || newpos.y > pivotMap.y + lengthMap - 1)
             return false;
         
         if(gc.PosContains(newpos))
@@ -110,7 +110,7 @@ public class PieceScript : MonoBehaviour {
 
             Destroy(gameObject);
 
-            gc.newPiece();
+            gc.NewPiece();
         }
     }
 }
