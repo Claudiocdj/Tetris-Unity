@@ -8,6 +8,7 @@ public class ScoreScript : MonoBehaviour {
     public Text scoreText;
     public Text levelText;
     public Text linesText;
+    public GameObject nextPiece;
 
     private int score;
     private int level;

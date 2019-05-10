@@ -14,8 +14,12 @@ public class PieceScript : MonoBehaviour {
     private float timeCount = 0f;
     private float timer;
 
+    private PieceColorScript pcs;
+
     void Start() {
         gc = transform.root.GetComponent<GameController>();
+
+        pcs = GetComponent<PieceColorScript>();
 
         lengthMap = gc.length;
         widthMap = gc.width;
@@ -23,8 +27,11 @@ public class PieceScript : MonoBehaviour {
 
         timer = gc.CurrentTime;
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) {
+            transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite = pcs.GetSprite(gc.CurrentLevel);
+
             block[i] = transform.GetChild(i).gameObject;
+        }
     }
 
     void Update() {
@@ -42,15 +49,15 @@ public class PieceScript : MonoBehaviour {
 
     private void InputCheck() {
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && CanMovePiece(Vector3.right))
+        if (Input.GetKeyDown(gc.rightInput) && CanMovePiece(Vector3.right))
             transform.position += Vector3.right;
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && CanMovePiece(Vector3.left))
+        else if (Input.GetKeyDown(gc.leftInput) && CanMovePiece(Vector3.left))
             transform.position += Vector3.left;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) RotateBlock();
+        if (Input.GetKeyDown(gc.rotateInput)) RotateBlock();
 
-        if (Input.GetKeyDown(KeyCode.DownArrow)) timer = gc.timerAcc;
+        if (Input.GetKeyDown(gc.speedInput)) timer = gc.timerAcc;
     }
 
     private void RotateBlock() {
@@ -88,7 +95,10 @@ public class PieceScript : MonoBehaviour {
         if (newpos.x < pivotMap.x || newpos.x > pivotMap.x + widthMap - 1)
             return false;
 
-        if (newpos.y < pivotMap.y || newpos.y > pivotMap.y + lengthMap - 1)
+        if (newpos.y > pivotMap.y + lengthMap - 1) return true;
+
+        //if (newpos.y < pivotMap.y || newpos.y > pivotMap.y + lengthMap - 1)
+        if (newpos.y < pivotMap.y)
             return false;
         
         if(gc.PosContains(newpos))
@@ -100,12 +110,14 @@ public class PieceScript : MonoBehaviour {
     private void MoveY() {
         if (CanMovePiece(Vector3.down))
             transform.position += Vector3.down;
-
+        
         else {
             for(int i = 0; i < 4; i++) {
                 block[i].transform.parent = null;
 
                 gc.SetGrid(block[i].transform.position);
+
+                block[i].GetComponent<BoxCollider2D>().enabled = true;
             }
 
             Destroy(gameObject);

@@ -5,43 +5,62 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     
     public GameObject[] pieces;
+    
 
     public int width;
     public int length;
-    public Vector2 instantiatePos;
+    private Vector2 instantiatePos;
+    private Vector2 nextPiecePos;
 
     public float timer;
     public float timerAcc;
     public float timeFactorPerLevel;
+
+    public KeyCode leftInput;
+    public KeyCode rightInput;
+    public KeyCode speedInput;
+    public KeyCode rotateInput;
+
+    public GameObject score;
+
     private float currentTime;
-    public float CurrentTime { get { return currentTime; } }
-
     private bool[,] grid;
-
+    private int nextPiece = -1;
+    private GameObject nextPieceObj;
     private ScoreScript ss;
+    
 
     //debug
-    public GameObject blockDebug;
-    public GameObject[,] goGrid;
+    //public GameObject blockDebug;
+    //public GameObject[,] goGrid;
 
+    public float CurrentTime { get { return currentTime; } }
 
-
+    public int CurrentLevel { get { return ss.Level; } }
+    
     private void Start() {
         grid = new bool[width, length];
 
-        ss = GameObject.FindWithTag("Score").GetComponent<ScoreScript>();
+        ss = score.GetComponent<ScoreScript>();
+
+        //goGrid = new GameObject[width, length];
+
+        //InstDebug();
+
+        float x = gameObject.transform.position.x + width / 2;
+        float y = gameObject.transform.position.y + length - 2;
+
+        instantiatePos = new Vector2(x, y);
+
+        nextPiecePos = ss.nextPiece.transform.position;
 
         InstantiatePiece();
-
-        goGrid = new GameObject[width, length];
-
-        InstDebug();
     }
 
     private void Update() {
-        DebugGrid();
+        //DebugGrid();
     }
-
+    /*
     private void InstDebug() {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
@@ -61,7 +80,7 @@ public class GameController : MonoBehaviour {
             }
         }
     }
-
+    */
     public void SetGrid(Vector3 val) {
         int x = (int)(val.x - transform.position.x);
         int y = (int)(val.y - transform.position.y);
@@ -85,8 +104,6 @@ public class GameController : MonoBehaviour {
     }
 
     private IEnumerator CheckLines() {
-        
-
         int blocksOnTheLine, destroyedLines = 0;
 
         for(int i = 0; i < length; i++) {
@@ -107,9 +124,11 @@ public class GameController : MonoBehaviour {
                 StartCoroutine(DownLine(i, destroyedLines));
         }
 
+        if (destroyedLines == 4) StartCoroutine(TetrisEffect());
+
         ss.AddLines(destroyedLines);
 
-        DebugGrid();
+        //DebugGrid();
     }
 
     private IEnumerator DestroyLine(int line) {
@@ -117,22 +136,9 @@ public class GameController : MonoBehaviour {
 
         //Debug.Log("cols.Length: " + cols.Length);
 
-        if (cols.Length < 10) {
-            Debug.Log("DEU PAU");
-            for (int i = 0; i < cols.Length; i++) {
-                Vector2 start = new Vector2(cols[i].transform.position.x + 0.2f, cols[i].transform.position.y + 0.2f);
-
-                Vector2 end = new Vector2(cols[i].transform.position.x + 0.8f, cols[i].transform.position.y + 0.2f);
-
-                Debug.DrawLine(start, end, Color.yellow, 10f);
-            }
-        }
-
         for (int i = 0; i < width; i++)
             grid[i, line] = false;
-
-
-
+        
         for(int i = width/2, j = width / 2 - 1; i <= width && j >= 0; i++, j--) {
                 Destroy(cols[i].transform.gameObject);
                 Destroy(cols[j].transform.gameObject);
@@ -171,15 +177,40 @@ public class GameController : MonoBehaviour {
     }
 
     private void InstantiatePiece() {
-        int n = Random.Range(0, pieces.Length);
-
         if (ss.Level > 20)
             currentTime = 20 * timeFactorPerLevel;
+
         else
             currentTime = timer - (ss.Level - 1) * timeFactorPerLevel;
 
-        GameObject obj = Instantiate(pieces[n], instantiatePos, Quaternion.identity);
+        if (nextPiece < 0 || nextPiece > pieces.Length)
+            nextPiece = Random.Range(0, pieces.Length);
+
+        GameObject obj = Instantiate(pieces[nextPiece], instantiatePos, Quaternion.identity);
 
         obj.transform.parent = gameObject.transform;
+
+        nextPiece = Random.Range(0, pieces.Length);
+
+        if (nextPieceObj != null)
+            Destroy(nextPieceObj);
+
+        nextPieceObj = Instantiate(pieces[nextPiece], nextPiecePos, Quaternion.identity);
+
+        nextPieceObj.GetComponent<PieceScript>().enabled = false;
+
+        nextPieceObj.name = "NextPiece";
+    }
+
+    private IEnumerator TetrisEffect() {
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        for (int i = 0; i < 10; i++) {
+            sr.color = Color.white;
+            yield return new WaitForSeconds(.01f);
+            sr.color = Color.black;
+            yield return new WaitForSeconds(.01f);
+        }
     }
 }
