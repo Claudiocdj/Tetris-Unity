@@ -209,10 +209,12 @@ public class GameController : MonoBehaviour {
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
+        Color originalColor = sr.color;
+
         for (int i = 0; i < 10; i++) {
             sr.color = Color.white;
             yield return new WaitForSeconds(.01f);
-            sr.color = Color.black;
+            sr.color = originalColor;
             yield return new WaitForSeconds(.01f);
         }
     }

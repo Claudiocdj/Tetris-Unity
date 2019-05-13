@@ -2,26 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class GameOverScript : MenuSelectScript {
-    
-    protected override void Start() {
-        base.Start();
-    }
+public class GameOverScript : MonoBehaviour{
 
-    protected override void Update() {
-        base.Update();
-    }
+    public Text scoreP1;
+    public Text scoreP2;
 
-    protected override void OptionSelected(string n) {
-        if(n == "Restart")
-            SceneManager.LoadScene("SinglePlayerMode");
+    public Text gameOverP1;
+    public Text gameOverP2;
 
-        if (n == "MainMenu")
-            SceneManager.LoadScene("Main");
+    public Text winText;
 
-        if (n == "RestartP2")
-            SceneManager.LoadScene("TwoPlayersMode");
+    public GameObject menu;
+
+    void Update() {
+        if(gameOverP1.IsActive() && gameOverP2.IsActive()) {
+            
+            if (int.Parse(scoreP1.text) > int.Parse(scoreP2.text))
+                winText.text = "PLAYER 1 WIN";
+
+            else if(int.Parse(scoreP1.text) < int.Parse(scoreP2.text))
+                winText.text = "PLAYER 2 WIN";
+
+            else
+                winText.text = "DRAW";
+
+            menu.SetActive(true);
+        }
     }
 }
