@@ -10,7 +10,11 @@ public class PieceScript : MonoBehaviour {
     private Vector3 pivotMap = new Vector3();
 
     private GameObject[] block = new GameObject[4];
-    
+
+    private Vector3 initPos;
+    private bool gameOver = false;
+    public bool isStaticPiece = false;
+
     private float timeCount = 0f;
     private float timer;
 
@@ -21,6 +25,8 @@ public class PieceScript : MonoBehaviour {
 
         pcs = GetComponent<PieceColorScript>();
 
+        initPos = gameObject.transform.position;
+        
         lengthMap = gc.length;
         widthMap = gc.width;
         pivotMap = gc.gameObject.transform.position;
@@ -35,7 +41,9 @@ public class PieceScript : MonoBehaviour {
     }
 
     void Update() {
-        InputCheck();
+        if (gameOver || isStaticPiece) return;
+
+        if(!gameOver) InputCheck();
 
         if (timeCount >= timer) {
             timeCount = 0f;
@@ -110,9 +118,15 @@ public class PieceScript : MonoBehaviour {
     private void MoveY() {
         if (CanMovePiece(Vector3.down))
             transform.position += Vector3.down;
-        
+
+        else if(initPos == transform.position) {
+            gc.GameOver();
+
+            gameOver = true;
+        }
+
         else {
-            for(int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++) {
                 block[i].transform.parent = null;
 
                 gc.SetGrid(block[i].transform.position);

@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class GameOverScript : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class GameOverScript : MenuSelectScript {
+    
+    protected override void Start() {
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    protected override void Update() {
+        base.Update();
+    }
+
+    protected override void OptionSelected(string n) {
+        if(n == "Restart")
+            SceneManager.LoadScene("SinglePlayerMode");
+
+        if (n == "MainMenu")
+            SceneManager.LoadScene("Main");
+
+        if (n == "RestartP2")
+            SceneManager.LoadScene("TwoPlayersMode");
     }
 }

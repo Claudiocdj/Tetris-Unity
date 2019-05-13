@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
     public KeyCode rotateInput;
 
     public GameObject score;
+    public GameObject gameOver;
 
     private float currentTime;
     private bool[,] grid;
@@ -197,8 +198,10 @@ public class GameController : MonoBehaviour {
 
         nextPieceObj = Instantiate(pieces[nextPiece], nextPiecePos, Quaternion.identity);
 
-        nextPieceObj.GetComponent<PieceScript>().enabled = false;
+        nextPieceObj.transform.parent = gameObject.transform;
 
+        nextPieceObj.GetComponent<PieceScript>().isStaticPiece = true;
+        
         nextPieceObj.name = "NextPiece";
     }
 
@@ -212,5 +215,9 @@ public class GameController : MonoBehaviour {
             sr.color = Color.black;
             yield return new WaitForSeconds(.01f);
         }
+    }
+
+    public void GameOver() {
+        gameOver.SetActive(true);
     }
 }

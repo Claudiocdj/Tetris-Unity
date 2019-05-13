@@ -194,6 +194,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1458406016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5747399519696899941, guid: 16f5a7cb849acf5498634599fe9c233f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5747399521016149406}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5747399521016149406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,11 +211,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOver
-      objectReference: {fileID: 0}
-    - target: {fileID: 5747399519696899941, guid: 16f5a7cb849acf5498634599fe9c233f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5747399519696899742, guid: 16f5a7cb849acf5498634599fe9c233f,
         type: 3}
@@ -465,6 +466,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 7548292646420202350, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7548292646420202349, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,5 +531,10 @@ PrefabInstance:
       propertyPath: score
       value: 
       objectReference: {fileID: 7268666306863966191}
+    - target: {fileID: 7548292646420202351, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: gameOver
+      value: 
+      objectReference: {fileID: 1458406016}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af75e83ba3fcd7b47b748d0df3aa6f5a, type: 3}
