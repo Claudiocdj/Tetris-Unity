@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     
@@ -40,6 +41,8 @@ public class GameController : MonoBehaviour {
     public int CurrentLevel { get { return ss.Level; } }
     
     private void Start() {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().LoadGame();
+
         grid = new bool[width, length];
 
         ss = score.GetComponent<ScoreScript>();
@@ -58,10 +61,11 @@ public class GameController : MonoBehaviour {
         InstantiatePiece();
     }
 
-    private void Update() {
-        //DebugGrid();
-    }
     /*
+    private void Update() {
+        /DebugGrid();
+    }
+    
     private void InstDebug() {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
@@ -220,6 +224,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void GameOver() {
+
         gameOver.SetActive(true);
     }
 }

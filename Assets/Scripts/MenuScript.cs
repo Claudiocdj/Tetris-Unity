@@ -12,11 +12,17 @@ public class MenuScript : MonoBehaviour {
     public KeyCode down;
     public KeyCode select;
 
+    public KeyCode up2;
+    public KeyCode down2;
+
     public Image screenTransition;
 
     private int currentArrow;
-
+    
     private void Start() {
+        if(SceneManager.GetActiveScene().name == "Main")
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().LoadFirstScreen();
+
         foreach (var arrow in arrows)
             arrow.enabled = false;
 
@@ -26,13 +32,15 @@ public class MenuScript : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(up) && currentArrow > 0) {
+        if ((Input.GetKeyDown(up) || Input.GetKeyDown(up2))
+            && currentArrow > 0) {
             arrows[currentArrow].enabled = false;
             currentArrow--;
             arrows[currentArrow].enabled = true;
         }
 
-        else if (Input.GetKeyDown(down) && currentArrow < arrows.Length - 1) {
+        else if ((Input.GetKeyDown(down) || Input.GetKeyDown(down2))
+            && currentArrow < arrows.Length - 1) {
             arrows[currentArrow].enabled = false;
             currentArrow++;
             arrows[currentArrow].enabled = true;
@@ -59,8 +67,9 @@ public class MenuScript : MonoBehaviour {
         if (n == "StartP2")
             SceneManager.LoadScene("TwoPlayersMode");
 
-        if (n == "MainMenu")
+        if (n == "MainMenu") {
             SceneManager.LoadScene("Main");
+        }
     }
 }
 

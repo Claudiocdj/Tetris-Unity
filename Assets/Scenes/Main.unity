@@ -285,6 +285,7 @@ RectTransform:
   - {fileID: 1470159155}
   - {fileID: 1504086299}
   - {fileID: 73930643}
+  - {fileID: 204234309}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -311,7 +312,88 @@ MonoBehaviour:
   up: 273
   down: 274
   select: 13
+  up2: 119
+  down2: 115
   screenTransition: {fileID: 73930644}
+--- !u!1 &204234308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 204234309}
+  - component: {fileID: 204234311}
+  - component: {fileID: 204234310}
+  m_Layer: 5
+  m_Name: controls (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &204234309
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204234308}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 185467776}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 213.4, y: -207.7}
+  m_SizeDelta: {x: 128, y: 32.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &204234310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204234308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Original Tetris sounds by Hirokazu Tanaka
+--- !u!222 &204234311
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204234308}
+  m_CullTransparentMesh: 0
 --- !u!1 &371812373
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,8 +970,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -225, y: -162}
-  m_SizeDelta: {x: 123.8, y: 121}
+  m_AnchoredPosition: {x: -196.18, y: -157.48}
+  m_SizeDelta: {x: 190.48, y: 122.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504086300
 MonoBehaviour:
@@ -924,21 +1006,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Menu controls:
+  m_Text: 'Controls:
 
-    - arrows keys
+    Select - "Enter"
 
-    - Enter
+    Pause - "Esc"
 
+    Sound on/off - "Z"
 
-    Player1
+    Player1 - Arrows keys
 
-    - arrows keys
-
-
-    Player2
-
-    - WASD'
+    Player2 - WASD'
 --- !u!222 &1504086301
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1106,3 +1184,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818917816}
   m_CullTransparentMesh: 0
+--- !u!1001 &784714470905790026
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 784714471515187794, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.742079
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.561832
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 105.32667
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784714471515187792, guid: 791bfc013b5d0744f9866e02c8785424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 791bfc013b5d0744f9866e02c8785424, type: 3}

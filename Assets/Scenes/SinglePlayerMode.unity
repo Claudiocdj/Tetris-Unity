@@ -445,6 +445,8 @@ MonoBehaviour:
   up: 273
   down: 274
   select: 13
+  up2: 0
+  down2: 0
   screenTransition: {fileID: 1458688823}
 --- !u!114 &1369586429
 MonoBehaviour:
@@ -616,7 +618,7 @@ GameObject:
   - component: {fileID: 1791280093}
   - component: {fileID: 1791280092}
   m_Layer: 5
-  m_Name: GAME OVER
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,11 +1052,35 @@ PrefabInstance:
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 1369586427}
+    - target: {fileID: 7548292646420202351, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: leftInput
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548292646420202351, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: rightInput
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548292646420202351, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: speedInput
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548292646420202351, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
+        type: 3}
+      propertyPath: rotateInput
+      value: 273
+      objectReference: {fileID: 0}
     - target: {fileID: 7548292646420202348, guid: af75e83ba3fcd7b47b748d0df3aa6f5a,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.5882353
+      value: 0.78431374
       objectReference: {fileID: 0}
+    - target: {fileID: 1958151611, guid: af75e83ba3fcd7b47b748d0df3aa6f5a, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1369586427}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af75e83ba3fcd7b47b748d0df3aa6f5a, type: 3}
 --- !u!114 &7605779439072841718
@@ -1247,6 +1273,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 48431761}
+    - target: {fileID: 8661156749908286190, guid: cf5153472c26ce6469e326e52a06caaa,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf5153472c26ce6469e326e52a06caaa, type: 3}
 --- !u!224 &8901789144898614046

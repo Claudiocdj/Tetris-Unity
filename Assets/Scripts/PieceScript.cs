@@ -12,7 +12,7 @@ public class PieceScript : MonoBehaviour {
     private GameObject[] block = new GameObject[4];
 
     private Vector3 initPos;
-    private bool gameOver = false;
+    public bool gameOver = false;
     public bool isStaticPiece = false;
 
     private float timeCount = 0f;
@@ -66,6 +66,8 @@ public class PieceScript : MonoBehaviour {
         if (Input.GetKeyDown(gc.rotateInput)) RotateBlock();
 
         if (Input.GetKeyDown(gc.speedInput)) timer = gc.timerAcc;
+
+        if(Input.GetKeyUp(gc.speedInput)) timer = gc.CurrentTime;
     }
 
     private void RotateBlock() {
