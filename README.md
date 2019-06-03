@@ -1,4 +1,4 @@
-</h1>Tetris</h1>
+<h1>Tetris</h1>
 
 Jogo tetris recriado utilizando Unity. Atualmente possui uma versão para um jogador e outra para dois jogadores competirem entre si.
 
