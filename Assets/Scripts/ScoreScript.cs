@@ -16,7 +16,7 @@ public class ScoreScript : MonoBehaviour {
     private int nextLevel;
 
     void Start() {
-        scoreText.text = "000000";
+        scoreText.text = "0000000";
         levelText.text = "000001";
         linesText.text = "000000";
 
@@ -60,21 +60,24 @@ public class ScoreScript : MonoBehaviour {
 
     private void SetToScreen(Text text, int n) {
         if (n < 10)
-            text.text = "00000" + n.ToString();
+            text.text = "000000" + n.ToString();
 
         else if (n < 100)
-            text.text = "0000" + n.ToString();
+            text.text = "00000" + n.ToString();
 
         else if (n < 1000)
-            text.text = "000" + n.ToString();
+            text.text = "0000" + n.ToString();
 
         else if (n < 10000)
+            text.text = "000" + n.ToString();
+
+        else if (n < 100000)
             text.text = "00" + n.ToString();
 
-        else if (n < 100000)
+        else if (n < 1000000)
             text.text = "0" + n.ToString();
 
-        else if (n < 100000)
+        else if (n < 10000000)
             text.text = n.ToString();
     }
 }
